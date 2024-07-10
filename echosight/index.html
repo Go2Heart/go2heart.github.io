@@ -52,7 +52,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">EchoSight Project Page</h1>
+            <h1 class="title is-1 publication-title">EchoSight: Advancing Visual-Language Models with Wiki Knowledge</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
@@ -162,14 +162,51 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Vertical Image Display -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="vertical-image-display">
+        <div class="image-item">
+          <img src="/echosight/static/images/teaser.png" alt="Teaser Image"/>
+          <h2 class="subtitle has-text-centered">
+            For visual questions such as <i>“When was the 1st ascent of this mountain?”</i>, 
+            <span style="color: #5871c2;">visual-only search</span> methods consider image similarity only, ignoring the textual details of the accompanying article. By incorporating 
+            <span style="color: #d2a45fe4;">multimodal reranking</span>, the correct entry, accounting for both visual and textual information, can be accurately identified.
+          </h2>
+        </div>
+        <div class="image-item">
+          <img src="/echosight/static/images/overall.png" alt="Overall Structure"/>
+          <h2 class="subtitle has-text-centered">
+            <strong>The overall view of our proposed EchoSight</strong>. 
+            <strong>(i)</strong> Given a visual question with an image, the retriever searches the reference image in the knowledge base for top 
+            <span style="font-style: italic;">k</span> similar images to get their corresponding Wikipedia Entries. 
+            <strong>(ii)</strong> After changing the granularity to sections, all the sections of retrieved entries are then reranked with the maximum pairwise similarity of their textual embeddings and the reference image+question's Q-Former query tokens. 
+            <strong>(iii)</strong> The top reranked section will be utilized as RAG prompt for the LLM to generate the ultimate answer.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Vertical Image Display -->
+
+<style>
+  .vertical-image-display .image-item {
+    margin-bottom: 20px; /* Space between items */
+  }
+  .vertical-image-display img {
+    width: 100%; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+</style>
 
 <!-- Image carousel -->
-<section class="hero is-small">
+<!-- <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
-        <!-- Your image here -->
         <img src="/echosight/static/images/teaser.png" alt="Teaser Image"/>
         <h2 class="subtitle has-text-centered">
           For visual questions such as <i>“When was the 1st ascent of this mountain?”</i>, 
@@ -178,7 +215,6 @@
         </h2>
       </div>
       <div class="item">
-        <!-- Your image here -->
         <img src="/echosight/static/images/overall.png" alt="Overall Structure"/>
         <h2 class="subtitle has-text-centered">
           <strong>The overall view of our proposed EchoSight</strong>. 
@@ -191,7 +227,7 @@
   </div>
 </div>
 </div>
-</section>
+</section> -->
 <!-- End image carousel -->
 
 
