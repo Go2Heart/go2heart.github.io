@@ -185,6 +185,23 @@
             <strong>(iii)</strong> The top reranked section will be utilized as RAG prompt for the LLM to generate the ultimate answer.
           </h2>
         </div>
+        <div class="image-item">
+          <img src="/echosight/static/images/VQA.png" alt="VQA Results"/>
+          <h2 class="subtitle has-text-centered">
+            <figcaption>
+              VQA Accuracy comparison with the SOTA methods. 
+              <span style="background-color: #e0e0e0;">Google Lens</span> 
+              method can be considered as the upperbound. Vanilla method indicates the LLM directly generate answers with textual questions only. 
+              BLIP-2 <a href="https://arxiv.org/abs/2301.12597"></a> and LLaVA <a href="https://arxiv.org/abs/2304.08485"></a> are strong vision language models yet with no retrieval augmented. 
+              Wiki-LLaVA <a href="https://arxiv.org/abs/2404.15406"></a> and DPR<sub>V+T<sup>*</sup></sub> <a href="https://arxiv.org/abs/2401.05736"></a> are recent works focusing on retrieval-augmented answer generation. 
+              Our proposed <strong>EchoSight</strong> is reported without and with multimodal reranking.
+          </figcaption>
+          </h2>
+        </div>
+        <!-- <div class="image-item">
+          <img src="/echosight/static/images/overall.png" alt="Overall Structure"/>
+          <h2 class="subtitle has-text-centered">
+        </div> -->
       </div>
     </div>
   </div>
@@ -196,7 +213,7 @@
     margin-bottom: 20px; /* Space between items */
   }
   .vertical-image-display img {
-    width: 100%; /* Adjust width as needed */
+    width: 85%; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
   }
 </style>
