@@ -141,6 +141,8 @@
 <!-- End teaser video -->
 
 <!-- Paper abstract -->
+
+
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -167,17 +169,19 @@
   <div class="hero-body">
     <div class="container">
       <div class="vertical-image-display">
+        <div class="columns is-centered has-text-centered"><h2 class="title">VQA with Multimodal Reranking</h2></div>
         <div class="image-item">
-          <img src="/echosight/static/images/teaser.png" alt="Teaser Image"/>
-          <h2 class="subtitle has-text-centered">
+          <img src="/echosight/static/images/teaser.png" alt="Teaser"/>
+          <h2 class="subtitle">
             For visual questions such as <i>“When was the 1st ascent of this mountain?”</i>, 
-            <span style="color: #5871c2;">visual-only search</span> methods consider image similarity only, ignoring the textual details of the accompanying article. By incorporating 
+            <span style="color: #6683e3;">visual-only search</span> methods consider image similarity only, ignoring the textual details of the accompanying article. By incorporating 
             <span style="color: #d2a45fe4;">multimodal reranking</span>, the correct entry, accounting for both visual and textual information, can be accurately identified.
           </h2>
         </div>
         <div class="image-item">
+          <div class="columns is-centered has-text-centered"><h2 class="title is-3">Overview</h2></div>
           <img src="/echosight/static/images/overall.png" alt="Overall Structure"/>
-          <h2 class="subtitle has-text-centered">
+          <h2 class="subtitle">
             <strong>The overall view of our proposed EchoSight</strong>. 
             <strong>(i)</strong> Given a visual question with an image, the retriever searches the reference image in the knowledge base for top 
             <span style="font-style: italic;">k</span> similar images to get their corresponding Wikipedia Entries. 
@@ -186,22 +190,32 @@
           </h2>
         </div>
         <div class="image-item">
+          <div class="columns is-centered has-text-centered"><h2 class="title is-3">Results</h2></div>
           <img src="/echosight/static/images/VQA.png" alt="VQA Results"/>
-          <h2 class="subtitle has-text-centered">
+          <h2 class="subtitle">
             <figcaption>
               VQA Accuracy comparison with the SOTA methods. 
               <span style="background-color: #e0e0e0;">Google Lens</span> 
               method can be considered as the upperbound. Vanilla method indicates the LLM directly generate answers with textual questions only. 
-              BLIP-2 <a href="https://arxiv.org/abs/2301.12597"></a> and LLaVA <a href="https://arxiv.org/abs/2304.08485"></a> are strong vision language models yet with no retrieval augmented. 
-              Wiki-LLaVA <a href="https://arxiv.org/abs/2404.15406"></a> and DPR<sub>V+T<sup>*</sup></sub> <a href="https://arxiv.org/abs/2401.05736"></a> are recent works focusing on retrieval-augmented answer generation. 
+              <a href="https://arxiv.org/abs/2301.12597">BLIP-2 </a> and  <a href="https://arxiv.org/abs/2304.08485">LLaVA</a> are strong vision language models yet with no retrieval augmented. 
+               <a href="https://arxiv.org/abs/2404.15406">Wiki-LLaVA</a> and  <a href="https://arxiv.org/abs/2401.05736">DPR<sub>V+T</sub><sup>*</sup></a> are recent works focusing on retrieval-augmented answer generation. 
               Our proposed <strong>EchoSight</strong> is reported without and with multimodal reranking.
           </figcaption>
           </h2>
         </div>
-        <!-- <div class="image-item">
-          <img src="/echosight/static/images/overall.png" alt="Overall Structure"/>
-          <h2 class="subtitle has-text-centered">
-        </div> -->
+        <div class="image-item">
+          <div class="columns is-centered has-text-centered"><h2 class="title is-3">Qualitative Results</h2></div>
+          <img src="/echosight/static/images/Qualitative.png" alt="VQA Results"/>
+        </div>
+        <div class="image-item">
+          <div class="columns is-centered has-text-centered"><h2 class="title is-3">Demo Examples</h2></div>
+          <h2 class="subtitle">
+            <figcaption>
+              <!-- More details about demo usage can be found at the Github Repo. -->
+          </figcaption>
+          <img src="/echosight/static/images/demo1.png" alt="Demo1"/>
+          <img src="/echosight/static/images/demo2.png" alt="Demo2"/>
+        </div>
       </div>
     </div>
   </div>
@@ -210,11 +224,14 @@
 
 <style>
   .vertical-image-display .image-item {
-    margin-bottom: 20px; /* Space between items */
+    margin-bottom: 50px; /* Space between items */
   }
   .vertical-image-display img {
-    width: 85%; /* Adjust width as needed */
+    width: 90%; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
+    /* Centering image */
+    display: block;
+    margin-left: calc(50% - 45%);
   }
 </style>
 
