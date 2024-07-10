@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>EchoSight Project Page</title>
+  <title>EchoSight: Advancing Visual-Language Models with Wiki Knowledge</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -56,9 +56,9 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Yibin Yan</a><sup>*</sup>,</span>
+                <a href="https://go2heart.github.io" target="_blank">Yibin Yan</a><sup>*</sup>,</span>
                 <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Weidi Xie</a><sup>*</sup>,</span>
+                  <a href="https://weidixie.github.io" target="_blank">Weidi Xie</a><sup>*</sup>,</span>
                   <!-- <span class="author-block">
                     <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
                   </span> -->
@@ -148,7 +148,9 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Knowledge-based Visual Question Answering (KVQA) tasks require answering questions about images using extensive background knowledge. Despite significant advancements, generative models often struggle with these tasks due to the limited integration of external knowledge. In this paper, we introduce EchoSight, a novel multimodal Retrieval-Augmented Generation (RAG) framework that enables large language models (LLMs) to answer visual questions requiring fine-grained encyclopedic
+            Knowledge-based Visual Question Answering (KVQA) tasks require answering questions about images using extensive background knowledge. Despite significant advancements, generative models often struggle with these tasks due to the limited integration of external knowledge. In this paper, we introduce 
+            <strong>EchoSight</strong>, 
+            a novel multimodal Retrieval-Augmented Generation (RAG) framework that enables large language models (LLMs) to answer visual questions requiring fine-grained encyclopedic
             knowledge. To strive for high-performing retrieval, EchoSight first searches wiki articles by using visual-only information, subsequently, these candidate articles are further reranked according to their relevance to the combined text-image query. This approach significantly improves the integration of multimodal knowledge, leading to enhanced retrieval outcomes and more accurate VQA responses. 
             Our experimental results on the E-VQA and InfoSeek datasets demonstrate that EchoSight establishes new state-of-the-art results in knowledge-based VQA, 
             achieving an accuracy of 41.8% on E-VQA and 31.3% on InfoSeek.
@@ -168,7 +170,7 @@
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
         <!-- Your image here -->
-        <img src="https://github.com/Go2Heart/EchoSight/assets/71871209/c9eb99d2-fc90-469f-ac69-5f28093863ab" alt="MY ALT TEXT"/>
+        <img src="/echosight/static/images/teaser.png" alt="Teaser Image"/>
         <h2 class="subtitle has-text-centered">
           For visual questions such as <i>“When was the 1st ascent of this mountain?”</i>, 
           <span style="color: #5871c2;">visual-only search</span> methods consider image similarity only, ignoring the textual details of the accompanying article. By incorporating 
@@ -177,7 +179,7 @@
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="https://github.com/Go2Heart/EchoSight/assets/71871209/4257097c-b7d0-4c8f-9436-b5f18253bd13" alt="MY ALT TEXT"/>
+        <img src="/echosight/static/images/overall.png" alt="Overall Structure"/>
         <h2 class="subtitle has-text-centered">
           <strong>The overall view of our proposed EchoSight</strong>. 
           <strong>(i)</strong> Given a visual question with an image, the retriever searches the reference image in the knowledge base for top 
