@@ -9,7 +9,7 @@ redirect_from:
 
 <!-- Who Am I?
 ====== -->
-I am a 1st-year PhD candiate at [Shanghai Jiao Tong University](https://www.sjtu.edu.cn/), supervised by [Weidi Xie](https://weidixie.github.io/index.html).
+I am a 1st-year PhD student at [Shanghai Jiao Tong University](https://www.sjtu.edu.cn/), supervised by [Weidi Xie](https://weidixie.github.io/index.html).
 
 
 I have been working on Multi-Modality Perception and Natural Languge Process. Feel free to contact me via email.
