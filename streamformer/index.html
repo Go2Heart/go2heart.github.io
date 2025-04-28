@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Learning Streaming Video Representation via Multitask Training</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Learning Streaming Video Representation via Multitask Training</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://go2heart.github.io" target="_blank">Yibin Yan*</a>, </span>
+                <span class="author-block">
+                  <a href="https://jazzcharles.github.io/" target="_blank">Jilan Xu*</a>, </span>
+                <span class="author-block">
+                  <!-- authors no web page-->
+                   Shangzhe Di, 
+                   Yikun Liu, Yudi Shi, Qirui Chen, Zeqian Li, Yifei Huang, 
+                  
+                <span class="author-block">
+                  <a href="https://weidixie.github.io" target="_blank">Weidi Xie</a></span>
+                  <!-- <span class="author-block">
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a> 
+                  </span> -->
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">School of Artificial Intelligence, Shanghai Jiao Tong University<br>Shanghai Innovation Institute, Shanghai AI Laboratory, Fudan University<br>Technical Report</span>
+                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <!-- <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2407.12735" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span> -->
+
+                    <!-- Supplementary PDF link -->
+                    <!-- <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span> -->
+
+                  <!-- Github link -->
+                  
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/abs/2407.12735" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+                </span> -->
+                <span class="link-block">
+                  <a href="https://go2heart.github.io/streamformer" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code Releasing soon</span>
+                </a>
+                </span>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video -->
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        Your video here 
+        <source src="static/videos/banner_video.mp4"
+        type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+      </h2>
+    </div>
+  </div>
+</section> -->
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+
+
+<section class="section hero ">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Understanding continuous video streams plays a fundamental role in real-time applications including embodied AI and autonomous driving. Unlike offline video understanding, streaming video understanding requires the ability to process video streams frame by frame, preserve historical information, and make low-latency decisions.To address these challenges, our main contributions are three-fold. (i) We develop a novel streaming video backbone, termed as <strong> StreamFormer</strong>, by incorporating causal temporal attention into a pre-trained vision transformer. This enables efficient streaming video processing while maintaining image representation capability.(ii) To train StreamFormer, we propose to unify diverse spatial-temporal video understanding tasks within a multitask visual-language alignment framework. Hence, StreamFormer learns global semantics, temporal dynamics, and fine-grained spatial relationships simultaneously. (iii) We conduct extensive experiments on online action detection, online video instance segmentation, and video question answering. StreamFormer achieves competitive results while maintaining efficiency, demonstrating its potential for real-time applications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Vertical Image Display -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="vertical-image-display">
+        <div class="columns is-centered has-text-centered"><h2 class="title">Streaming Video Representation</h2></div>
+        <div class="image-item">
+          <img src="/streamformer/static/images/teaser.png" alt="Teaser"/>
+          <h2 class="subtitle">
+          <figcaption>
+            <br>
+            <strong>StreamFormer</strong> learns streaming video representations of various granularities through multitask training, making it applicable for diverse downstream tasks such as <strong>Online Action Detection</strong>, <strong> Online Video Instance Segmentation</strong>, and <strong>Video Question Answering.</strong>
+          </figcaption>
+          </h2>
+        </div>
+        <div class="columns is-centered has-text-centered"><h2 class="title is-3">Method</h2></div>
+        <div class="image-item">
+          <img src="/streamformer/static/images/method.png" alt="Overall Structure"/>
+          <h2 class="subtitle">
+            <figcaption>
+              <br>
+              <strong>Overall framework of StreamFormer.</strong> Left: Our StreamFormer is trained under a unified visual-language alignment framework,
+              enabling simultaneous understanding of global semantics, temporal dynamics, and fine-grained spatial relationships. Right: Each level
+              utilizes features of different granularities: (i) last frame for the global level, (ii) per frame for the temporal level, (iii) and per frame per
+              patch feature for the spatial level.
+          </figcaption>
+          </h2>
+        </div>
+        <div class="image-item">
+        <img src="/streamformer/static/images/multitask.png" alt="Multitask Training"/>
+        <h2 class="subtitle">
+          <figcaption>
+            <br>
+            Specifically, we optimize the backbone with three complementary objectives:
+            <br>
+            (i) <strong>Global-level Tasks:</strong> The objective is to learn the global semantics of a video clip, encompassing both the primary action and the scene. 
+            <!-- Return here.--> <br>
+            (ii) <strong>Temporal-level Tasks:</strong> The objective here is to develop fine-grained discriminative capabilities along the temporal dimension, enabling the model to perform tasks such as per-frame action understanding and perceiving events that occur across frames. 
+            <!-- Return here.--> <br>
+            (iii) <strong>Spatial-level Tasks:</strong> The aim is to learn the fine-grained spatial relationships of a video clip, which involves understanding the interactions between different objects in all video frames.
+        </figcaption>
+        </div>
+        <div class="columns is-centered has-text-centered"><h2 class="title is-3">Experiments</h2></div>
+        <div class="image-item">
+          <img src="/streamformer/static/images/comparison.png" alt="Experiments"/>
+          <h2 class="subtitle">
+            <figcaption>
+              <br>
+              We present our downstream performance on three tasks: <strong>Online Action Detection</strong>, <strong>Online Video Instance Segmentation</strong>, and <strong>Video Question Answering</strong>.
+              Our baseline is the original image encoder of SigLIP,
+              <i>i.e.</i>, without multitask training and temporal modeling.
+              It can be inferred that our streamformer achieves significantly better performance than the baseline on all downstream tasks, including online action detection, online video instance segmentation, and video question answering.
+              <!-- We draw the following conclusions: 
+              (1) The baseline achieves relatively good performance on downstream tasks, highlighting the strong image representation capability of SigLIP; 
+              (2) the incorporation of any form of video-language pre-training, either global, temporal, or spatial, yields a notable improvement over the baseline on all downstream tasks; 
+              (3) both global- and temporal-level tasks yield better results across various downstream tasks, while models trained solely on spatial-level tasks perform sub-optimally in online action detection and video question answering. This may be attributed to the relatively limited amount of data available for video segmentation, leading to insufficient understanding of verbs/actions; 
+              (4) by integrating tasks of varying granularities, the model achieves competitive downstream performance, proving the effectiveness of our multitask training approach. -->
+          </figcaption>
+          </h2>
+        </div>
+        <!-- <div class="columns is-centered has-text-centered"><h2 class="title is-3">Qualitative Results</h2></div>
+        <div class="image-item">
+          <img src="/echosight/static/images/Qualitative.png" alt="VQA Results"/>
+        </div>
+        <div class="columns is-centered has-text-centered"><h2 class="title is-3">Demo Examples</h2></div>
+        <div class="image-item">
+          <img src="/echosight/static/images/demo1.png" alt="Demo1"/>
+        </div>
+        <div class="image-item">
+          <img src="/echosight/static/images/demo2.png" alt="Demo2"/>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Vertical Image Display -->
+
+<style>
+  .subtitle {
+    width: 70%;
+    display: block;
+    margin-left: calc(50% - 35%);
+  }
+  .vertical-image-display .image-item {
+    margin-bottom: 50px; /* Space between items */
+  }
+  .vertical-image-display img {
+    width: 70%; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    /* Centering image */
+    display: block;
+    margin-left: calc(50% - 35%);
+  }
+</style>
+
+<!-- Image carousel -->
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <img src="/echosight/static/images/teaser.png" alt="Teaser Image"/>
+        <h2 class="subtitle has-text-centered">
+          For visual questions such as <i>“When was the 1st ascent of this mountain?”</i>, 
+          <span style="color: #5871c2;">visual-only search</span> methods consider image similarity only, ignoring the textual details of the accompanying article. By incorporating 
+          <span style="color: #d2a45fe4;">multimodal reranking</span>, the correct entry, accounting for both visual and textual information, can be accurately identified.
+        </h2>
+      </div>
+      <div class="item">
+        <img src="/echosight/static/images/overall.png" alt="Overall Structure"/>
+        <h2 class="subtitle has-text-centered">
+          <strong>The overall view of our proposed EchoSight</strong>. 
+          <strong>(i)</strong> Given a visual question with an image, the retriever searches the reference image in the knowledge base for top 
+          <span style="font-style: italic;">k</span> similar images to get their corresponding Wikipedia Entries. 
+          <strong>(ii)</strong> After changing the granularity to sections, all the sections of retrieved entries are then reranked with the maximum pairwise similarity of their textual embeddings and the reference image+question's Q-Former query tokens. 
+          <strong>(iii)</strong> The top reranked section will be utilized as RAG prompt for the LLM to generate the ultimate answer.
+        </h2>
+      </div>
+  </div>
+</div>
+</div>
+</section> -->
+<!-- End image carousel -->
+
+
+
+
+<!-- Youtube video -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End youtube video -->
+
+
+<!-- Video carousel -->
+<!-- End video carousel -->
+
+
+
+
+
+
+<!-- Paper poster -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section> -->
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{yan-xie-2024-echosight,
+          title = "{E}cho{S}ight: Advancing Visual-Language Models with {W}iki Knowledge",
+          author = "Yan, Yibin  and
+            Xie, Weidi",
+          editor = "Al-Onaizan, Yaser  and
+            Bansal, Mohit  and
+            Chen, Yun-Nung",
+          booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2024",
+          month = nov,
+          year = "2024",
+          address = "Miami, Florida, USA",
+          publisher = "Association for Computational Linguistics",
+          url = "https://aclanthology.org/2024.findings-emnlp.83",
+          pages = "1538--1551",
+          abstract = "Knowledge-based Visual Question Answering (KVQA) tasks require answering questions about images using extensive background knowledge. Despite significant advancements, generative models often struggle with these tasks due to the limited integration of external knowledge. In this paper, we introduce **EchoSight**, a novel multimodal Retrieval-Augmented Generation (RAG) framework that enables large language models (LLMs) to answer visual questions requiring fine-grained encyclopedic knowledge. To strive for high-performing retrieval, EchoSight first searches wiki articles by using visual-only information, subsequently, these candidate articles are further reranked according to their relevance to the combined text-image query. This approach significantly improves the integration of multimodal knowledge, leading to enhanced retrieval outcomes and more accurate VQA responses. Our experimental results on the E-VQA and InfoSeek datasets demonstrate that EchoSight establishes new state-of-the-art results in knowledge-based VQA, achieving an accuracy of 41.8{\%} on E-VQA and 31.3{\%} on InfoSeek.",
+      } 
+
+      </code></pre>
+    </div>
+</section> -->
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
