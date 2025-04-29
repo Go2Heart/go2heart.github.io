@@ -228,17 +228,30 @@
           </figcaption>
           </h2>
         </div>
-        <!-- <div class="columns is-centered has-text-centered"><h2 class="title is-3">Qualitative Results</h2></div>
+
         <div class="image-item">
-          <img src="/echosight/static/images/Qualitative.png" alt="VQA Results"/>
+          <img src="/streamformer/static/images/kvcache.png" alt="Inference Efficiency"/>
+          <h2 class="subtitle">
+            <figcaption>
+              <br>
+              Equipped with KV cache, our StreamFormer achieves a significant reduction in inference latency and memory consumption compared to the bi-directional attention baseline.
+              The KV cache mechanism allows the model to store and reuse previously computed key-value pairs when inferencing, enabling efficient processing of streaming video data.
+          </figcaption>
+          </h2>
         </div>
-        <div class="columns is-centered has-text-centered"><h2 class="title is-3">Demo Examples</h2></div>
+
         <div class="image-item">
-          <img src="/echosight/static/images/demo1.png" alt="Demo1"/>
+          <img src="/streamformer/static/images/data_efficiency.png" alt="Data Efficiency"/>
+          <h2 class="subtitle">
+            <figcaption>
+              <br>
+              With our proposed multitask training strategy, we can achieve competitive performance compared to the video-text contrastive baseline.
+              We randomly select 1M video-text pairs from WebVid-10M, which is comparable to the scale of our pre-training data. 
+              The models trained on WebVid-1M exhibit relatively low performance, possibly due to insufficient pre-training data for video-text contrastive learning. 
+              In comparison, our approach outperforms WebVid-1M model even using only 0.1M pre-training data, significantly reducing the computational cost for training.  
+          </figcaption>
+          </h2>
         </div>
-        <div class="image-item">
-          <img src="/echosight/static/images/demo2.png" alt="Demo2"/>
-        </div> -->
       </div>
     </div>
   </div>
