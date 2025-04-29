@@ -22,7 +22,7 @@ I am passionate about advancing Multimodal Perception and Video Representation t
 
 ## Preprint
 ### Learning Streaming Video Representation via Multitask Training
-[[Project Page]](/streamformer/) [[Code Releasing soon!]](/streamformer/)
+[[Project Page]](/streamformer/) [[Code Releasing soon!]](/streamformer/) [[Paper]](https://arxiv.org/abs/2504.20041)
 
 ### EchoSight: Advancing Visual-Language Models with Wiki Knowledge
 [[Project Page]](/echosight/) [[Code]](https://github.com/Go2Heart/EchoSight) [[Paper]](https://arxiv.org/abs/2407.12735)
