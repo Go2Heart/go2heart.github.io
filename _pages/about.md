@@ -12,14 +12,18 @@ redirect_from:
 I am a 1st-year PhD student at [Shanghai Jiao Tong University](https://www.sjtu.edu.cn/), supervised by [Weidi Xie](https://weidixie.github.io/index.html).
 
 
-I have been working on Multi-Modality Perception and Natural Languge Process. Feel free to contact me via email.
+I am passionate about advancing Multimodal Perception and Video Representation through innovative research. If you'd like to collaborate or have any questions, feel free to reach out to me via email.
 
 ## News
+- [2025.04] StreamFormer is now available on [Arxiv](https://arxiv.org/abs/2504.20041)!
 - [2024.10] EchoSight has been accepted to the EMNLP Findings!
 - [2024.07] Open sourcing EchoSight with [code](https://github.com/Go2Heart/EchoSight) and [paper](https://arxiv.org/abs/2407.12735)!
 
 
 ## Preprint
+### Learning Streaming Video Representation via Multitask Training
+[[Project Page]](/streamformer/) [[Code Releasing soon!]](/streamformer/)
+
 ### EchoSight: Advancing Visual-Language Models with Wiki Knowledge
 [[Project Page]](/echosight/) [[Code]](https://github.com/Go2Heart/EchoSight) [[Paper]](https://arxiv.org/abs/2407.12735)
 
