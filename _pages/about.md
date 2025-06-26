@@ -15,6 +15,7 @@ I am a 1st-year PhD student at [Shanghai Jiao Tong University](https://www.sjtu.
 I am passionate about advancing Multimodal Perception and Video Representation through innovative research. If you'd like to collaborate or have any questions, feel free to reach out to me via email.
 
 ## News
+- [2025.06] StreamFormer has been accepted to ICCV 2025! See you in Hawaii!
 - [2025.04] StreamFormer is now available on [Arxiv](https://arxiv.org/abs/2504.20041)!
 - [2024.10] EchoSight has been accepted to the EMNLP Findings!
 - [2024.07] Open sourcing EchoSight with [code](https://github.com/Go2Heart/EchoSight) and [paper](https://arxiv.org/abs/2407.12735)!
@@ -22,7 +23,7 @@ I am passionate about advancing Multimodal Perception and Video Representation t
 
 ## Preprint
 ### Learning Streaming Video Representation via Multitask Training
-[[Project Page]](/streamformer/) [[Code Releasing soon!]](/streamformer/) [[Paper]](https://arxiv.org/abs/2504.20041)
+[[Project Page]](/streamformer/) [[Code]](https://github.com/Go2Heart/StreamFormer) [[Paper]](https://arxiv.org/abs/2504.20041)
 
 ### EchoSight: Advancing Visual-Language Models with Wiki Knowledge
 [[Project Page]](/echosight/) [[Code]](https://github.com/Go2Heart/EchoSight) [[Paper]](https://arxiv.org/abs/2407.12735)
