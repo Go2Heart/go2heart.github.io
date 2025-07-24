@@ -14,20 +14,56 @@ I am a 1st-year PhD student at [Shanghai Jiao Tong University](https://www.sjtu.
 
 I am passionate about advancing Multimodal Perception and Video&3D Representation. If you'd like to collaborate or have any questions, feel free to reach out to me via email.
 
-## News
-- [2025.07] StreamFormer has been nominated as **Oral Presentation** in ICCV 2025!
+## 🚀News
+- [2025.07] StreamFormer has been nominated as an **Oral Presentation** in ICCV 2025!
 - [2025.06] StreamFormer has been accepted to **ICCV 2025**! See you in Hawaii!
 - [2025.04] StreamFormer is now available on [Arxiv](https://arxiv.org/abs/2504.20041)!
 - [2024.10] EchoSight has been accepted to the **EMNLP Findings**!
 - [2024.07] Open sourcing EchoSight with [code](https://github.com/Go2Heart/EchoSight) and [paper](https://arxiv.org/abs/2407.12735)!
 
 
-## Preprint
-### [ICCV 2025 Oral] Learning Streaming Video Representation via Multitask Training
-[[Project Page]](/streamformer/) [[Code]](https://github.com/Go2Heart/StreamFormer) [[Paper]](https://arxiv.org/abs/2504.20041)
+## 📄Publications
 
-### [EMNLP 2024] EchoSight: Advancing Visual-Language Models with Wiki Knowledge
+<div style="display: flex; align-items: center; border-radius: 8px; padding: 20px; margin: 20px 0;">
+  <div style="flex: 1; margin-right: 20px;">
+    <img src="streamformer/static/images/method.png" alt="StreamFormer" style="width: 100%; max-width: 300px; border-radius: 4px;">
+  </div>
+  <div style="flex: 2;">
+    <h4 style="margin-top: 0; margin-bottom: 4px;">Learning Streaming Video Representation via Multitask Training</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;"><strong>Yibin Yan*</strong>, Jilan Xu*, Shangzhe Di, Yikun Liu, Yudi Shi, Qirui Chen, Zeqian Li, Yifei Huang, Weidi Xie</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;"><em>ICCV</em>, 2025 (<strong>Oral</strong>)</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;">
+      <a href="/streamformer/" style="margin-right: 5px;">[Project Page]</a>
+      <a href="https://github.com/Go2Heart/StreamFormer" style="margin-right: 5px;">[Code]</a>
+      <a href="https://arxiv.org/abs/2504.20041">[Paper]</a>
+    </h4>
+  </div>
+</div>
+<!-- ### [ICCV 2025 Oral] Learning Streaming Video Representation via Multitask Training
+[[Project Page]](/streamformer/) [[Code]](https://github.com/Go2Heart/StreamFormer) [[Paper]](https://arxiv.org/abs/2504.20041) 
+
+<!-- <img src="streamformer/static/images/method.png" alt="StreamFormer" style="width: 100%; max-width: 600px;display: block; margin: 0 auto;"> -->
+
+<div style="display: flex; align-items: center; border-radius: 8px; padding: 20px; margin: 20px 0;">
+  <div style="flex: 1; margin-right: 20px;">
+    <img src="echosight/static/images/teaser.png" alt="EchoSight" style="width: 100%; max-width: 300px; border-radius: 4px;">
+  </div>
+  <div style="flex: 2;">
+    <h4 style="margin-top: 0; margin-bottom: 4px;">EchoSight: Advancing Visual-Language Models with Wiki Knowledge</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;"><strong>Yibin Yan*</strong>, Weidi Xie</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;"><em>EMNLP</em>, 2024</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;">
+      <a href="/echosight/" style="margin-right: 5px;">[Project Page]</a>
+      <a href="https://github.com/Go2Heart/EchoSight" style="margin-right: 5px;">[Code]</a>
+      <a href="https://arxiv.org/abs/2407.12735">[Paper]</a>
+    </h4>
+  </div>
+</div>
+
+<!-- ### [EMNLP 2024] EchoSight: Advancing Visual-Language Models with Wiki Knowledge
 [[Project Page]](/echosight/) [[Code]](https://github.com/Go2Heart/EchoSight) [[Paper]](https://arxiv.org/abs/2407.12735)
+
+<img src="echosight/static/images/teaser.png" alt="EchoSight" style="width: 100%; max-width: 600px;display: block; margin: 0 auto;"> -->
 
 <!-- This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io).
 
