@@ -12,7 +12,7 @@ redirect_from:
 I am a 2nd-year PhD student at [Shanghai Jiao Tong University](https://www.sjtu.edu.cn/), supervised by [Weidi Xie](https://weidixie.github.io/index.html).
 
 
-I am passionate about advancing Multimodal Perception and Video&3D Representation. If you'd like to collaborate or have any questions, feel free to reach out to me via email.
+I am passionate about Multimodal Perception, Video Representation, 3D/4D Vision and Embodied Control. If you'd like to collaborate or have any questions, feel free to reach out to me via email.
 
 ## 🚀News
 - [2025.07] StreamFormer has been nominated as an **Oral Presentation** in ICCV 2025!
