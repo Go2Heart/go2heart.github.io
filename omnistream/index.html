@@ -10,6 +10,9 @@
     <meta property="og:title" content="OmniStream" />
     <meta property="og:description" content="Mastering Perception, Reconstruction and Action in Continuous Streams" />
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1231,7 +1234,8 @@
         <p class="body-text">
             Thanks to our causal temporal attention mechanism, OmniStream natively supports KV-caching during inference.
             This allows the model to process incoming video streams frame-by-frame with O(T) temporal complexity per
-            step, avoiding redundant re-computation. Furthermore, 3D-RoPE enables zero-shot length extrapolation (<em>e.g.</em>, 110 frames) far beyond the training horizon of T=16 frames.
+            step, avoiding redundant re-computation. Furthermore, 3D-RoPE enables zero-shot length extrapolation
+            (<em>e.g.</em>, 110 frames) far beyond the training horizon of T=16 frames.
         </p>
 
         <div class="figure-block">
@@ -1281,7 +1285,9 @@
         <p class="body-text">
             We evaluate OmniStream across <strong>five domains</strong> with a strictly <strong>frozen
                 backbone</strong>: image &amp; video probing, streaming geometric reconstruction, visual backbone for
-            VLMs, and visual backbone for VLA policies. The model is pre-trained on ~200M frames from 29 datasets, covering both 2D image and video datasets, 3D/4D datasets and visual-language datasets (more details in the paper).
+            VLMs, and visual backbone for VLA policies. The model is pre-trained on ~200M frames from 29 datasets,
+            covering both 2D image and video datasets, 3D/4D datasets and visual-language datasets (more details in the
+            paper).
         </p>
 
         <!-- Holistic evaluation table -->
@@ -1494,14 +1500,16 @@
 
         <div class="callout" style="border-left-color: #9b59b6;">
             <i class="fas fa-brain" style="color: #9b59b6;"></i>
-            <strong>VLM Reasoning:</strong>  Our frozen OmniStream aligned with a LLM (Qwen2.5-7B) achieves
-            state-of-the-art on VSI-Bench (<strong>70.6%</strong>), surpassing even geometry-aware baselines — without any auxiliary geometric modules — validating that unified
+            <strong>VLM Reasoning:</strong> Our frozen OmniStream aligned with a LLM (Qwen2.5-7B) achieves
+            state-of-the-art on VSI-Bench (<strong>70.6%</strong>), surpassing even geometry-aware baselines — without
+            any auxiliary geometric modules — validating that unified
             streaming pre-training naturally engenders rich spatial understanding.
         </div>
 
         <div class="callout" style="border-left-color: #e74c3c;">
             <i class="fas fa-robot" style="color: #e74c3c;"></i>
-            <strong>VLA Embodied Control:</strong> Building upon the VLM, we attach a lightweight MLP to decode actions to adapt OmniStream into a VLA policy. It is the first frozen visual encoder to demonstrate
+            <strong>VLA Embodied Control:</strong> Building upon the VLM, we attach a lightweight MLP to decode actions
+            to adapt OmniStream into a VLA policy. It is the first frozen visual encoder to demonstrate
             effective zero-shot transferability to robotic manipulation benchmarks
             (<strong>CALVIN: 3.89</strong>), bridging the gap between perception and action by explicitly
             encoding 3D geometry and temporal dynamics during pre-training.
@@ -1610,7 +1618,7 @@
             is critical to bridging the semantic gap.
         </div>
 
-        
+
 
         <!-- Radar chart -->
         <!-- <h3 class="subsection-title">Holistic Performance Profile</h3>
