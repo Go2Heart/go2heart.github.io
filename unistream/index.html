@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OmniStream: Mastering Perception, Reconstruction and Action in Continuous Streams</title>
+    <meta name="description"
+        content="OmniStream: a unified streaming visual backbone that effectively perceives, reconstructs, and acts from diverse visual inputs.">
+    <meta property="og:title" content="OmniStream" />
+    <meta property="og:description" content="Mastering Perception, Reconstruction and Action in Continuous Streams" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <style>
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #FDF5EB;
+            --bg-alt: #F5EBD9;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --accent-light: #dbeafe;
+            --border: #e2d9cc;
+            --code-bg: #1e1e2e;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --max-width: 1100px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(253, 245, 235, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+            animation: heroShimmer 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes heroShimmer {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-2%, -1%);
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-badge i {
+            font-size: 0.7rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--text) 0%, #4338ca 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Authors */
+        .authors {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.3rem 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .authors a,
+        .authors span {
+            font-size: 0.95rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .authors a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .authors .equal {
+            font-size: 0.75rem;
+            vertical-align: super;
+            color: var(--accent);
+        }
+
+        .affiliations {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.3rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition);
+            border: 1.5px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--text);
+            color: #fff;
+            border-color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            border-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn i,
+        .btn .ai {
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        .section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* ============================================
+           TEASER IMAGE
+           ============================================ */
+        .teaser-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .teaser-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .teaser-caption {
+            max-width: var(--max-width);
+            margin: 1rem auto 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* ============================================
+           ABSTRACT
+           ============================================ */
+        .abstract-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .abstract-text strong {
+            color: var(--accent-dark);
+            font-weight: 700;
+        }
+
+        /* ============================================
+           HIGHLIGHT CARDS (key contributions)
+           ============================================ */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            transition: all var(--transition);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent);
+        }
+
+        .highlight-card .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .highlight-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .highlight-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           FIGURES
+           ============================================ */
+        .figure-block {
+            margin: 3rem 0;
+        }
+
+        .figure-block img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .figure-block figcaption {
+            margin-top: 1rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .figure-block figcaption strong {
+            color: var(--text);
+        }
+
+        /* Wide figure */
+        .figure-wide {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        /* ============================================
+           SUB-SECTION TITLES
+           ============================================ */
+        .subsection-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .body-text {
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .body-text strong {
+            font-weight: 600;
+        }
+
+        /* ============================================
+           RESULTS TABLE
+           ============================================ */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+
+        .results-table thead {
+            background: var(--bg-alt);
+        }
+
+        .results-table th {
+            padding: 0.7rem 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+
+        .results-table td {
+            padding: 0.6rem 0.9rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .results-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .results-table tr.ours {
+            background: rgba(37, 99, 235, 0.06);
+        }
+
+        .results-table tr.ours td {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .results-table .best {
+            color: var(--accent-dark) !important;
+            font-weight: 700 !important;
+        }
+
+        /* Modality row colors */
+        .results-table tr.row-image {
+            background: rgba(37, 99, 235, 0.06);
+        }
+
+        .results-table tr.row-video {
+            background: rgba(230, 126, 34, 0.07);
+        }
+
+        .results-table tr.row-3d {
+            background: rgba(46, 204, 113, 0.07);
+        }
+
+        .results-table tr.row-vlm {
+            background: rgba(155, 89, 182, 0.07);
+        }
+
+        .results-table tr.row-vla {
+            background: rgba(231, 76, 60, 0.07);
+        }
+
+        .results-table tr.row-image td,
+        .results-table tr.row-video td,
+        .results-table tr.row-3d td,
+        .results-table tr.row-vlm td,
+        .results-table tr.row-vla td {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .table-caption {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.8rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           CALLOUT / REMARK BOX
+           ============================================ */
+        .callout {
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .callout i {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+
+        /* ============================================
+           BIBTEX
+           ============================================ */
+        .bibtex-section {
+            margin-top: 1rem;
+        }
+
+        .bibtex-block {
+            background: var(--code-bg);
+            color: #cdd6f4;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .bibtex-block code {
+            font-family: inherit;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #cdd6f4;
+            padding: 0.4rem 0.7rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 6rem 1.2rem 3rem;
+            }
+
+            .section {
+                padding: 2.5rem 1.2rem;
+            }
+
+            .teaser-section {
+                padding: 0 1.2rem 2rem;
+            }
+
+            .figure-wide {
+                padding: 0 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-row {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           DIVIDER
+           ============================================ */
+        .divider {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            border: none;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Two-column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .two-col img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ============================================
+           VISUALIZATION CAROUSEL
+           ============================================ */
+
+        /* Task icon indicator bar */
+        .viz-indicator-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .viz-icon-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.45rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            font-family: 'Inter', sans-serif;
+            transition: all var(--transition);
+        }
+
+        .viz-icon-btn .icon-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            transition: all var(--transition);
+        }
+
+        .viz-icon-btn .icon-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.01em;
+            transition: color var(--transition);
+            white-space: nowrap;
+        }
+
+        /* Active states per task */
+        .viz-icon-btn[data-task="depth"].active .icon-circle {
+            background: rgba(46, 204, 113, 0.12);
+            border-color: #2ecc71;
+            color: #1a9e56;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+        }
+
+        .viz-icon-btn[data-task="depth"].active .icon-label {
+            color: #1a9e56;
+        }
+
+        .viz-icon-btn[data-task="vos"].active .icon-circle {
+            background: rgba(230, 126, 34, 0.12);
+            border-color: #e67e22;
+            color: #c0621a;
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
+        }
+
+        .viz-icon-btn[data-task="vos"].active .icon-label {
+            color: #c0621a;
+        }
+
+        .viz-icon-btn[data-task="qa"].active .icon-circle {
+            background: rgba(155, 89, 182, 0.12);
+            border-color: #9b59b6;
+            color: #7d3f99;
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.15);
+        }
+
+        .viz-icon-btn[data-task="qa"].active .icon-label {
+            color: #7d3f99;
+        }
+
+        .viz-icon-btn[data-task="robot"].active .icon-circle {
+            background: rgba(231, 76, 60, 0.12);
+            border-color: #e74c3c;
+            color: #c0392b;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+        }
+
+        .viz-icon-btn[data-task="robot"].active .icon-label {
+            color: #c0392b;
+        }
+
+        .viz-icon-btn:hover .icon-circle {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Carousel viewport */
+        .viz-carousel-wrap {
+            position: relative;
+        }
+
+        .viz-carousel-viewport {
+            overflow: hidden;
+            border-radius: 2px;
+            /* Allow side slides to peek out */
+            padding: 0.5rem 0;
+        }
+
+        .viz-carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            align-items: center;
+            will-change: transform;
+        }
+
+        /* Each slide: 72% width so neighbours peek on both sides */
+        .viz-slide {
+            flex: 0 0 72%;
+            padding: 0 0.6rem;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            opacity: 0.35;
+            transform: scale(0.93);
+            cursor: pointer;
+        }
+
+        .viz-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Caption below each slide — only visible when slide is active */
+        .viz-slide-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-top: 0.6rem;
+            padding: 0 0.25rem;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+            pointer-events: none;
+        }
+
+        .viz-slide.active .viz-slide-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .viz-slide video,
+        .viz-slide img {
+            width: 100%;
+            display: block;
+            background: #1e1e2e;
+            object-fit: contain;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Depth slides: shrink media to ~80% while preserving aspect ratio */
+        .viz-slide[data-task="depth"] video,
+        .viz-slide[data-task="depth"] img {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Nav arrow buttons */
+        .viz-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .viz-arrow {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            backdrop-filter: blur(8px);
+        }
+
+        .viz-arrow:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+        }
+
+        .viz-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Dot indicators */
+        .viz-dots {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .viz-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all var(--transition);
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+
+        .viz-dot.active {
+            background: var(--text);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .viz-slide {
+                flex: 0 0 90%;
+            }
+
+            .viz-indicator-bar {
+                gap: 1rem;
+            }
+
+            .viz-icon-btn .icon-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .viz-icon-btn .icon-label {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================
+     NAVIGATION
+     ============================================ -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">OmniStream</a>
+            <div class="nav-links">
+                <a href="#abstract">Abstract</a>
+                <a href="#visualization">Visualization</a>
+                <a href="#method">Method</a>
+                <a href="#experiments">Experiments</a>
+                <a href="#bibtex">BibTeX</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================
+     HERO
+     ============================================ -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-stream"></i>
+                Technical Report
+            </div>
+            <h1>OmniStream</h1>
+            <p class="hero-subtitle">
+                Mastering Perception, Reconstruction and Action in Continuous Streams
+            </p>
+
+            <!-- Authors -->
+            <div class="authors">
+                <span><a href="https://go2heart.github.io" target="_blank">Yibin Yan</a><span
+                        class="equal">*</span>,</span>
+                <span><a href="https://jazzcharles.github.io/" target="_blank">Jilan Xu</a><span
+                        class="equal">*</span>,</span>
+                <span>Shangzhe Di,</span>
+                <span><a href="https://haoningwu.github.io/" target="_blank">Haoning Wu</a>,</span>
+                <span><a href="https://weidixie.github.io" target="_blank">Weidi Xie</a></span>
+            </div>
+            <div class="affiliations">
+                School of Artificial Intelligence, SJTU &nbsp;·&nbsp; Shanghai Innovation Institute &nbsp;·&nbsp; VGG,
+                Oxford<br>
+                <span style="font-size: 0.78rem; color: #888;">* Joint first author</span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="btn-row">
+                <a href="static/Arxiv_paper.pdf" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-file-pdf"></i> Paper
+                </a>
+                <a href="#" target="_blank" class="btn btn-outline">
+                    <i class="ai ai-arxiv"></i> arXiv
+                </a>
+                <a href="https://github.com/Go2Heart/OmniStream" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-github"></i> Code
+                </a>
+                <a href="https://huggingface.co/StreamFormer/OmniStream" target="_blank" class="btn btn-outline">
+                    <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HF"
+                        style="height:1em;"> Model
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+     TEASER IMAGE
+     ============================================ -->
+    <div class="teaser-section fade-in">
+        <img src="static/images/teaser.png" alt="OmniStream Teaser" class="teaser-img">
+        <p class="teaser-caption">
+            <strong>Left:</strong> OmniStream supports a wide spectrum of tasks, including 2D/3D perception,
+            vision-language understanding, and embodied robotic manipulation.
+            <br>
+            <strong>Right:</strong> The frozen features of our single backbone achieve highly competitive or superior
+            performance compared to leading domain-specific experts.
+        </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ============================================
+     ABSTRACT
+     ============================================ -->
+    <section class="section fade-in" id="abstract">
+        <h2 class="section-title">Abstract</h2>
+        <p class="abstract-text">
+            Modern visual agents require representations that are <strong>general</strong>, <strong>causal</strong>, and
+            <strong>physically structured</strong> to operate in real-time streaming environments.
+            However, current vision foundation models remain fragmented, specializing narrowly in image semantic
+            perception, offline temporal modeling, or spatial geometry. This paper introduces
+            <strong>OmniStream</strong>, a unified streaming visual backbone that effectively perceives, reconstructs,
+            and acts from diverse visual inputs. By incorporating causal spatiotemporal attention and 3D rotary
+            positional embeddings (3D-RoPE), our model supports efficient, frame-by-frame online processing of video
+            streams via a persistent KV-cache.
+            We pre-train <strong>OmniStream</strong> using a synergistic multi-task framework coupling static and
+            temporal representation learning, streaming geometric reconstruction, and vision-language alignment on
+            <strong>29 datasets</strong>.
+            Extensive evaluations show that, even with a <strong>strictly frozen backbone</strong>,
+            <strong>OmniStream</strong> achieves consistently competitive performance with specialized experts across
+            image and video probing, streaming geometric reconstruction, complex video and spatial reasoning, as well as
+            robotic manipulation&nbsp;(unseen at training). Rather than pursuing benchmark-specific dominance, our work
+            demonstrates the viability of training a single, versatile vision backbone that generalizes across semantic,
+            spatial, and temporal reasoning, <em>i.e.</em>, a more meaningful step toward general-purpose visual
+            understanding for interactive and embodied agents.
+        </p>
+
+        <div class="highlights">
+            <div class="highlight-card">
+                <div class="card-icon">🏗️</div>
+                <h3>Unified Architecture</h3>
+                <p>Causal spatiotemporal attention + 3D-RoPE turn a pre-trained image ViT into an efficient online
+                    streaming backbone with KV-cache support.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="card-icon">🎯</div>
+                <h3>Multi-task Pre-training</h3>
+                <p>Synergistic training across 29 datasets spanning self-supervised learning, geometric reconstruction,
+                    and vision-language alignment (~200M frames).</p>
+            </div>
+            <div class="highlight-card">
+                <div class="card-icon">🧊</div>
+                <h3>Frozen Backbone Transfer</h3>
+                <p>A single frozen backbone achieves competitive results across perception, 3D reconstruction, VLM
+                    reasoning, and robotic manipulation.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================
+     VISUALIZATION
+     ============================================ -->
+    <section class="section fade-in" id="visualization">
+        <h2 class="section-title">Visualization</h2>
+        <!-- <p class="body-text">
+            Qualitative results of OmniStream across four task domains, demonstrating the versatility of a single
+            frozen backbone for streaming video understanding.
+        </p> -->
+
+        <!-- Task icon indicator bar -->
+        <div class="viz-indicator-bar">
+            <button class="viz-icon-btn" data-task="vos" data-index="3" onclick="vizJumpTo(3)">
+                <div class="icon-circle"><i class="fas fa-object-group"></i></div>
+                <span class="icon-label">Video Object Seg.</span>
+            </button>
+            <button class="viz-icon-btn active" data-task="depth" data-index="0" onclick="vizJumpTo(0)">
+                <div class="icon-circle"><i class="fas fa-cubes"></i></div>
+                <span class="icon-label">Video Depth</span>
+            </button>
+            <button class="viz-icon-btn" data-task="qa" data-index="6" onclick="vizJumpTo(6)">
+                <div class="icon-circle"><i class="fas fa-brain"></i></div>
+                <span class="icon-label">Spatial Video QA</span>
+            </button>
+            <button class="viz-icon-btn" data-task="robot" data-index="9" onclick="vizJumpTo(9)">
+                <div class="icon-circle"><i class="fas fa-robot"></i></div>
+                <span class="icon-label">Robotic Control</span>
+            </button>
+        </div>
+
+        <!-- Carousel -->
+        <div class="viz-carousel-wrap">
+            <div class="viz-carousel-viewport">
+                <div class="viz-carousel-track" id="vizTrack">
+                    <!-- VOS -->
+                    <div class="viz-slide" data-task="vos">
+                        <img src="static/videos/vos_1.webp" alt="VOS example 1">
+                        <p class="viz-slide-caption">Video object segmentation: the blackswan scene.</p>
+                    </div>
+                    <div class="viz-slide" data-task="vos">
+                        <img src="static/videos/vos_2.webp" alt="VOS example 2">
+                        <p class="viz-slide-caption">Video object segmentation: the drift-straight scene.</p>
+                    </div>
+                    <div class="viz-slide" data-task="vos">
+                        <img src="static/videos/vos_3.webp" alt="VOS example 3">
+                        <p class="viz-slide-caption">Video object segmentation: the horse-jumping scene.</p>
+                    </div>
+                    <!-- Video Depth -->
+                    <div class="viz-slide" data-task="depth">
+                        <img src="static/videos/depth_1.gif" alt="Depth example 1">
+                        <p class="viz-slide-caption">Streaming video depth estimation.</p>
+                    </div>
+                    <div class="viz-slide" data-task="depth">
+                        <img src="static/videos/depth_2.gif" alt="Depth example 2">
+                        <p class="viz-slide-caption">Streaming video depth estimation.</p>
+                    </div>
+                    <!-- Spatial Video QA -->
+                    <div class="viz-slide" data-task="qa">
+                        <img src="static/videos/videoqa_1.webp" alt="QA example 1">
+                        <p class="viz-slide-caption">Q: If I am standing by the power strip and facing the telephone, is
+                            the door to my left, right, or back? </p>
+                        <p class="viz-slide-caption">A: Back.</p>
+                    </div>
+                    <!-- Robotic Control -->
+                    <div class="viz-slide" data-task="robot">
+                        <img src="static/videos/robot_1.webp" alt="Robotic Control example 1">
+                        <p class="viz-slide-caption">Robotic manipulation: put spoon on table cloth.</p>
+                    </div>
+                    <div class="viz-slide" data-task="robot">
+                        <img src="static/videos/robot_2.webp" alt="Robotic Control example 2">
+                        <p class="viz-slide-caption">Robotic manipulation: stack green cube on yellow cube.</p>
+                    </div>
+                    <div class="viz-slide" data-task="robot">
+                        <img src="static/videos/robot_3.webp" alt="Robotic Control example 3">
+                        <p class="viz-slide-caption">Robotic manipulation: put eggplant in basket.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation row -->
+            <div class="viz-nav">
+                <button class="viz-arrow" id="vizPrev" onclick="vizMove(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="viz-dots" id="vizDots"></div>
+                <button class="viz-arrow" id="vizNext" onclick="vizMove(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================
+     METHOD
+     ============================================ -->
+    <section class="section fade-in" id="method">
+        <h2 class="section-title">Method</h2>
+
+        <p class="body-text">
+            OmniStream is built upon a pre-trained DINOv3 ViT-L, extended with two key modifications: (i) <strong>causal
+                spatiotemporal attention</strong> that enforces strict temporal causality and enables efficient
+            frame-by-frame inference via a persistent KV-cache; (ii) <strong>3D rotary positional embeddings
+                (3D-RoPE)</strong> that extend 2D spatial RoPE to a consistent spatiotemporal relative encoding.
+        </p>
+
+        <!-- Overall framework figure -->
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/main.png" alt="OmniStream Overall Framework">
+                <figcaption>
+                    <strong>Overall framework of OmniStream.</strong> Equipped with 3D-RoPE and causal spatiotemporal
+                    attention, our unified backbone is trained via a multi-task framework that couples static and
+                    temporal representation learning, streaming geometric reconstruction, and vision-language alignment.
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3 class="subsection-title">Causal Spatiotemporal Attention</h3>
+        <p class="body-text">
+            A naive Transformer that attends over all frames violates causality and is inefficient for streaming. We
+            apply spatiotemporal self-attention with a <strong>causal temporal mask</strong>, so tokens at time
+            <em>t</em> may only attend to tokens from times ≤ <em>t</em>. This enables streaming inference: when a new
+            frame arrives, we compute its queries and reuse cached keys/values from past frames, achieving online
+            processing <strong>without recomputing attention</strong> over the full stream.
+        </p>
+
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/causal_attn.png" alt="Causal Attention Mechanism"
+                    style="max-width: 700px; margin: 0 auto;">
+                <figcaption>
+                    <strong>Causal attention mechanism.</strong> Tokens at frame <em>t</em> attend only to tokens from
+                    frames ≤ <em>t</em>, enabling efficient streaming inference via KV-cache.
+                </figcaption>
+            </figure>
+        </div>
+
+        <!-- KV Cache Efficiency -->
+        <h3 class="subsection-title">Streaming Inference Efficiency</h3>
+        <p class="body-text">
+            Thanks to our causal temporal attention mechanism, OmniStream natively supports KV-caching during inference.
+            This allows the model to process incoming video streams frame-by-frame with O(T) temporal complexity per
+            step, avoiding redundant re-computation. Furthermore, 3D-RoPE enables zero-shot length extrapolation (<em>e.g.</em>, 110 frames) far beyond the training horizon of T=16 frames.
+        </p>
+
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/kvcache.png" alt="KV-Cache Inference Efficiency"
+                    style="max-width: 750px; margin: 0 auto;">
+                <figcaption>
+                    <strong>Streaming inference with KV-cache.</strong> OmniStream achieves significant reduction in
+                    inference latency and memory consumption via KV-cache reuse.
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3 class="subsection-title">Unified Multi-task Training</h3>
+        <p class="body-text">
+            We train OmniStream with three complementary objectives that jointly encourage representations that are
+            temporally coherent, geometrically grounded, and language-aligned:
+        </p>
+
+        <div class="highlights" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="highlight-card">
+                <h3>📐 Static & Temporal SSL</h3>
+                <p>Student-teacher distillation that unifies image and causal video modeling through
+                    global and patch-level objectives.</p>
+            </div>
+            <div class="highlight-card">
+                <h3>🌐 Geometric Reconstruction</h3>
+                <p>Feed-forward geometric heads to inject explicit 3D constraints,
+                    ensuring features encode physical scene structure.</p>
+            </div>
+            <div class="highlight-card">
+                <h3>💬 Vision-Language Alignment</h3>
+                <p>A lightweight language decoder trained on captioning, OCR, and grounding aligns visual tokens with
+                    linguistic concepts.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================
+     EXPERIMENTS
+     ============================================ -->
+    <section class="section fade-in" id="experiments">
+        <h2 class="section-title">Experiments</h2>
+
+        <p class="body-text">
+            We evaluate OmniStream across <strong>five domains</strong> with a strictly <strong>frozen
+                backbone</strong>: image &amp; video probing, streaming geometric reconstruction, visual backbone for
+            VLMs, and visual backbone for VLA policies. The model is pre-trained on ~200M frames from 29 datasets, covering both 2D image and video datasets, 3D/4D datasets and visual-language datasets (more details in the paper).
+        </p>
+
+        <!-- Holistic evaluation table -->
+        <h3 class="subsection-title">Holistic Evaluation</h3>
+
+        <div class="table-container">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="text-align: left;">Benchmark</th>
+                        <th rowspan="2">Metric</th>
+                        <th rowspan="2">Ours</th>
+                        <th rowspan="2">DINOv3-L</th>
+                        <th rowspan="2">V-JEPA2-L</th>
+                        <th rowspan="2">CUT3R</th>
+                        <th rowspan="2">LLaVA-Video</th>
+                        <th rowspan="2">OpenVLA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row-image">
+                        <td>ImageNet<sub>cls</sub></td>
+                        <td>ACC@1 ↑</td>
+                        <td>84.7</td>
+                        <td class="best">86.7</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-image">
+                        <td>NYUv2<sub>depth</sub></td>
+                        <td>RMSE ↓</td>
+                        <td class="best">0.377</td>
+                        <td>0.377</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-image">
+                        <td>ADE20K<sub>seg</sub></td>
+                        <td>mIoU ↑</td>
+                        <td>49.1</td>
+                        <td class="best">51.5</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-video">
+                        <td>SSv2<sub>act</sub></td>
+                        <td>ACC@1 ↑</td>
+                        <td>68.5</td>
+                        <td>54.0</td>
+                        <td class="best">73.7</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-video">
+                        <td>K400<sub>act</sub></td>
+                        <td>ACC@1 ↑</td>
+                        <td class="best">85.7</td>
+                        <td>83.6</td>
+                        <td>85.1</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-video">
+                        <td>DAVIS'17<sub>vos</sub></td>
+                        <td>J&amp;F ↑</td>
+                        <td>71.6</td>
+                        <td class="best">73.2</td>
+                        <td>44.2</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-3d" style="border-top: 2px solid var(--border);">
+                        <td>Sintel<sub>depth</sub></td>
+                        <td>absRel ↓</td>
+                        <td class="best">0.314</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.421</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-3d">
+                        <td>BONN<sub>depth</sub></td>
+                        <td>absRel ↓</td>
+                        <td class="best">0.072</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.078</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-3d">
+                        <td>ScanNet<sub>pose</sub></td>
+                        <td>ATE ↓</td>
+                        <td class="best">0.076</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.099</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-vlm" style="border-top: 2px solid var(--border);">
+                        <td>VideoMME<sub>vqa</sub></td>
+                        <td>Acc. ↑</td>
+                        <td>60.7</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="best">61.8</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-vlm">
+                        <td>VideoMMMU<sub>vqa</sub></td>
+                        <td>Acc. ↑</td>
+                        <td class="best">40.0</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>38.7</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-vlm">
+                        <td>PerceptionTest<sub>vqa</sub></td>
+                        <td>Acc. ↑</td>
+                        <td class="best">68.9</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>67.6</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-vlm">
+                        <td>EgoSchema<sub>vqa</sub></td>
+                        <td>Acc. ↑</td>
+                        <td class="best">60.9</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>57.3</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-vlm">
+                        <td>VSI-Bench<sub>vqa</sub></td>
+                        <td>Acc. ↑</td>
+                        <td class="best">70.6</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>35.6</td>
+                        <td>-</td>
+                    </tr>
+                    <tr class="row-vla" style="border-top: 2px solid var(--border);">
+                        <td>CALVIN<sub>mani</sub></td>
+                        <td>Avg. Len ↑</td>
+                        <td class="best">3.89</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>2.55</td>
+                    </tr>
+                    <tr class="row-vla">
+                        <td>Simpler-Bridge<sub>mani</sub></td>
+                        <td>SR% ↑</td>
+                        <td>45.8</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="best">53.7</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="table-caption">
+            <strong>Holistic evaluation.</strong> We compare OmniStream across 5 domains with a frozen backbone. "-"
+            indicates a specialized baseline is not natively applicable to the given task.
+        </p>
+
+        <div class="callout" style="border-left-color: #2563eb;">
+            <i class="fas fa-image" style="color: #2563eb;"></i>
+            <strong>Image Probing:</strong> OmniStream preserves robust spatial discrimination comparable to
+            the image specialist DINOv3, achieving competitive results on dense prediction tasks
+            (NYUv2 and ADE20K), confirming that multi-task training does not compromise fine-grained spatial priors.
+        </div>
+
+        <div class="callout" style="border-left-color: #e67e22;">
+            <i class="fas fa-video" style="color: #e67e22;"></i>
+            <strong>Video Probing:</strong> OmniStream significantly outperforms DINOv3 on motion-intensive
+            tasks (<strong>SSv2: 68.5% vs. 54.0%</strong>). Unlike typical video backbones that sacrifice spatial
+            quality (e.g., V-JEPA2 at 44.2 J&amp;F on DAVIS), OmniStream maintains strong dense spatiotemporal
+            tracking (<strong>71.6 J&amp;F</strong>), bridging the gap between static and dynamic perception.
+        </div>
+
+        <div class="callout" style="border-left-color: #2ecc71;">
+            <i class="fas fa-cubes" style="color: #2ecc71;"></i>
+            <strong>3D Geometric Reconstruction:</strong> OmniStream achieves highly competitive or superior
+            results against specialized online 3D models on depth estimation (Sintel, BONN) and camera pose
+            estimation (TUM, ScanNet), while natively supporting KV-cache streaming inference.
+        </div>
+
+        <div class="callout" style="border-left-color: #9b59b6;">
+            <i class="fas fa-brain" style="color: #9b59b6;"></i>
+            <strong>VLM Reasoning:</strong>  Our frozen OmniStream aligned with a LLM (Qwen2.5-7B) achieves
+            state-of-the-art on VSI-Bench (<strong>70.6%</strong>), surpassing even geometry-aware baselines — without any auxiliary geometric modules — validating that unified
+            streaming pre-training naturally engenders rich spatial understanding.
+        </div>
+
+        <div class="callout" style="border-left-color: #e74c3c;">
+            <i class="fas fa-robot" style="color: #e74c3c;"></i>
+            <strong>VLA Embodied Control:</strong> Building upon the VLM, we attach a lightweight MLP to decode actions to adapt OmniStream into a VLA policy. It is the first frozen visual encoder to demonstrate
+            effective zero-shot transferability to robotic manipulation benchmarks
+            (<strong>CALVIN: 3.89</strong>), bridging the gap between perception and action by explicitly
+            encoding 3D geometry and temporal dynamics during pre-training.
+        </div>
+
+        <!-- Ablation -->
+        <h3 class="subsection-title">Ablation Study</h3>
+        <p class="body-text">
+            We investigate the contribution of each pre-training objective. The results demonstrate that our unified
+            multi-task formulation is not merely a concatenation of independent losses, but a <strong>synergistic
+                framework</strong> where semantic, dynamic, and geometric objectives mutually reinforce the backbone.
+        </p>
+
+        <div class="table-container">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Method</th>
+                        <th>SSv2 ↑</th>
+                        <th>DAVIS ↑</th>
+                        <th>ImageNet ↑</th>
+                        <th>NYUv2 ↓</th>
+                        <th>ADE20k ↑</th>
+                        <th>VSI-Bench ↑</th>
+                        <th>VideoMME ↑</th>
+                        <th>CALVIN ↑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="ours">
+                        <td><strong>OmniStream (Full)</strong></td>
+                        <td class="best">69.3</td>
+                        <td class="best">71.6</td>
+                        <td class="best">85.2</td>
+                        <td class="best">0.379</td>
+                        <td class="best">49.6</td>
+                        <td class="best">57.3</td>
+                        <td class="best">54.1</td>
+                        <td class="best">3.80</td>
+                    </tr>
+                    <tr>
+                        <td>w/o VideoSSL</td>
+                        <td>63.0</td>
+                        <td>67.7</td>
+                        <td>85.4</td>
+                        <td>0.420</td>
+                        <td>47.2</td>
+                        <td>57.9</td>
+                        <td>55.8</td>
+                        <td>3.42</td>
+                    </tr>
+                    <tr>
+                        <td>w/o 3D Geometry</td>
+                        <td>68.4</td>
+                        <td>69.7</td>
+                        <td>85.0</td>
+                        <td>0.471</td>
+                        <td>42.3</td>
+                        <td>52.5</td>
+                        <td>53.8</td>
+                        <td>3.34</td>
+                    </tr>
+                    <tr>
+                        <td>w/o Captioning</td>
+                        <td>67.4</td>
+                        <td>71.0</td>
+                        <td>84.4</td>
+                        <td>0.395</td>
+                        <td>46.9</td>
+                        <td>44.9</td>
+                        <td>45.0</td>
+                        <td>2.38</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="table-caption">
+            <strong>Ablation study.</strong> Each pre-training objective contributes uniquely: VideoSSL drives temporal
+            dynamics, 3D Geometry is prerequisite for spatial intelligence and embodied control, and Captioning is
+            critical for VLM integration.
+        </p>
+
+        <div class="callout" style="border-left-color: #e67e22;">
+            <i class="fas fa-film" style="color: #e67e22;"></i>
+            <strong>w/o VideoSSL:</strong> Omitting video data from self-supervised learning severely degrades
+            dynamic perception (<strong>SSv2: 69.3→63.0</strong>, <strong>DAVIS: 71.6→67.7</strong>) and embodied
+            control (<strong>CALVIN: 3.80→3.42</strong>), confirming its necessity for capturing temporal motions
+            and dynamics.
+        </div>
+
+        <div class="callout" style="border-left-color: #2ecc71;">
+            <i class="fas fa-cube" style="color: #2ecc71;"></i>
+            <strong>w/o 3D Geometry:</strong> Disabling geometric reconstruction collapses spatial perception
+            (<strong>NYUv2 RMSE: 0.379→0.471</strong>, <strong>ADE20K drops 7.3 mIoU</strong>) and causes sharp
+            declines in spatial intelligence (<strong>VSI-Bench drops 4.8%</strong>) and embodied control
+            (<strong>CALVIN drops 0.46</strong>), validating that explicit 3D priors are prerequisites for
+            Embodied AI.
+        </div>
+
+        <div class="callout" style="border-left-color: #9b59b6;">
+            <i class="fas fa-comment-dots" style="color: #9b59b6;"></i>
+            <strong>w/o Captioning:</strong> While pure vision probing remains stable, omitting vision-language
+            alignment causes catastrophic failures in VLM integration (<strong>VideoMME: 54.1→45.0</strong>,
+            <strong>VSI-Bench: 57.3→44.9</strong>) and devastates VLA performance
+            (<strong>CALVIN: 3.80→2.38</strong>), highlighting that early language alignment within the backbone
+            is critical to bridging the semantic gap.
+        </div>
+
+        
+
+        <!-- Radar chart -->
+        <!-- <h3 class="subsection-title">Holistic Performance Profile</h3>
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/holistic_radar_chart_polygon.png" alt="Holistic Radar Chart"
+                    style="max-width: 550px; margin: 0 auto;">
+                <figcaption>
+                    <strong>Radar chart</strong> showing OmniStream's competitive performance across all evaluation
+                    dimensions.
+                </figcaption>
+            </figure>
+        </div> -->
+
+        <!-- VSI-Bench -->
+        <!-- <h3 class="subsection-title">Spatial Intelligence: VSI-Bench</h3>
+        <p class="body-text">
+            On VSI-Bench, a challenging benchmark for spatial intelligence, OmniStream-7B achieves
+            <strong>state-of-the-art performance (70.6%)</strong>, surpassing specialized geometry-aware baselines such
+            as VLM-3R and SpaceMind — even with a frozen visual encoder. This validates that our unified streaming
+            pre-training naturally engenders rich, actionable spatial understanding.
+        </p> -->
+
+        <!-- Video Depth Visualization -->
+        <!-- <h3 class="subsection-title">Streaming Geometric Reconstruction</h3>
+        <p class="body-text">
+            OmniStream achieves highly competitive streaming depth estimation and camera pose estimation across multiple
+            benchmarks (Sintel, BONN, KITTI, TUM, ScanNet), rivaling or surpassing specialized 3D models — while also
+            maintaining strong semantic capabilities.
+        </p>
+
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/vdepth_vis.png" alt="Video Depth Visualization">
+                <figcaption>
+                    <strong>Qualitative results</strong> of streaming video depth estimation from OmniStream.
+                </figcaption>
+            </figure>
+        </div> -->
+
+        <!-- DAVIS Visualization -->
+        <!-- <h3 class="subsection-title">Dense Video Understanding</h3>
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/davis1.png" alt="DAVIS Result 1">
+            </figure>
+        </div>
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/davis2.png" alt="DAVIS Result 2">
+            </figure>
+        </div>
+        <div class="figure-block">
+            <figure>
+                <img src="static/images/davis3.png" alt="DAVIS Result 3">
+                <figcaption>
+                <strong>DAVIS'17 Video Object Segmentation.</strong> OmniStream leverages KV-cache to enable long-range
+                feature extraction across the entire video, achieving 71.6 J&amp;F — on par with leading per-frame image
+                extractors.
+                </figcaption>
+            </figure>
+        </div> -->
+
+
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================
+     BIBTEX
+     ============================================ -->
+    <section class="section bibtex-section fade-in" id="bibtex">
+        <h2 class="section-title">BibTeX</h2>
+        <div class="bibtex-block">
+            <button class="copy-btn" onclick="copyBibtex()"><i class="fas fa-copy"></i> Copy</button>
+            <code>
+
+            </code>
+        </div>
+    </section>
+
+    <!-- ============================================
+     FOOTER
+     ============================================ -->
+    <footer class="footer">
+        <p>
+            This page design is inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a>.
+            Licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license">CC
+                BY-SA 4.0</a>.
+        </p>
+    </footer>
+
+    <!-- ============================================
+     SCRIPTS
+     ============================================ -->
+    <script>
+        // Scroll-triggered fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Copy BibTeX
+        function copyBibtex() {
+            const code = document.querySelector('.bibtex-block code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            });
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Nav shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 1px 20px rgba(0,0,0,0.06)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // ── Visualization Carousel ──────────────────────────────────────
+        (function () {
+            const slides = Array.from(document.querySelectorAll('.viz-slide'));
+            const track = document.getElementById('vizTrack');
+            const dotsEl = document.getElementById('vizDots');
+            const viewport = track.parentElement;
+            const total = slides.length;
+            let current = 0;
+            let autoplayTimer = null;
+            const AUTOPLAY_DELAY = 3500; // ms between slides
+
+            // Remove any hardcoded active class — JS controls it
+            slides.forEach(s => s.classList.remove('active'));
+
+            // Build taskMap dynamically from actual slides in DOM
+            const taskMap = {};
+            slides.forEach((s, i) => {
+                const task = s.dataset.task;
+                if (!(task in taskMap)) taskMap[task] = i;
+            });
+
+            // Sync icon buttons data-index to match actual DOM positions
+            document.querySelectorAll('.viz-icon-btn').forEach(btn => {
+                const task = btn.dataset.task;
+                if (task in taskMap) {
+                    btn.dataset.index = taskMap[task];
+                    btn.setAttribute('onclick', 'vizJumpTo(' + taskMap[task] + ')');
+                }
+            });
+
+            // Hide icon buttons for tasks with no slides
+            document.querySelectorAll('.viz-icon-btn').forEach(btn => {
+                const task = btn.dataset.task;
+                btn.style.display = (task in taskMap) ? '' : 'none';
+            });
+
+            // Build dots
+            slides.forEach((_, i) => {
+                const d = document.createElement('button');
+                d.className = 'viz-dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Slide ' + (i + 1));
+                d.addEventListener('click', () => { stopAutoplay(); vizGoTo(i); });
+                dotsEl.appendChild(d);
+            });
+
+            // Click on a non-active slide navigates to it
+            slides.forEach((s, i) => {
+                s.addEventListener('click', () => {
+                    if (i !== current) { stopAutoplay(); vizGoTo(i); }
+                });
+            });
+
+            // ── Centering math ──────────────────────────────────────────
+            // We want slide[current] centered in the viewport.
+            // Use the slide's actual rendered offsetWidth so it works
+            // at any breakpoint without duplicating the CSS flex-basis value.
+            function getOffset(index) {
+                const vw = viewport.offsetWidth;
+                // offsetWidth includes padding of the slide div
+                const sw = slides[0].offsetWidth;
+                return (vw - sw) / 2 - index * sw;
+            }
+
+            function updateTrack() {
+                track.style.transform = 'translateX(' + getOffset(current) + 'px)';
+            }
+
+            function updateSlides() {
+                slides.forEach((s, i) => s.classList.toggle('active', i === current));
+            }
+
+            function updateDots() {
+                document.querySelectorAll('.viz-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            function updateIcons() {
+                const keys = Object.keys(taskMap);
+                document.querySelectorAll('.viz-icon-btn').forEach(btn => {
+                    const task = btn.dataset.task;
+                    if (!(task in taskMap)) return;
+                    const start = taskMap[task];
+                    const pos = keys.indexOf(task);
+                    const end = pos < keys.length - 1 ? taskMap[keys[pos + 1]] : total;
+                    btn.classList.toggle('active', current >= start && current < end);
+                });
+            }
+
+            function vizGoTo(index) {
+                current = Math.max(0, Math.min(total - 1, index));
+                updateTrack();
+                updateSlides();
+                updateDots();
+                updateIcons();
+            }
+
+            // ── Autoplay ────────────────────────────────────────────────
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayTimer = setInterval(() => {
+                    vizGoTo((current + 1) % total);
+                }, AUTOPLAY_DELAY);
+            }
+
+            function stopAutoplay() {
+                if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+            }
+
+            // Pause on hover, resume on leave
+            const wrap = document.querySelector('.viz-carousel-wrap');
+            wrap.addEventListener('mouseenter', stopAutoplay);
+            wrap.addEventListener('mouseleave', startAutoplay);
+
+            // Also pause when icon buttons are clicked
+            document.querySelectorAll('.viz-icon-btn').forEach(btn => {
+                btn.addEventListener('click', stopAutoplay);
+            });
+
+            // Expose globals
+            window.vizMove = (dir) => { stopAutoplay(); vizGoTo(current + dir); };
+            window.vizJumpTo = (idx) => { stopAutoplay(); vizGoTo(idx); };
+
+            // Init
+            vizGoTo(0);
+            // Start autoplay once page is idle (give images time to layout)
+            setTimeout(startAutoplay, 800);
+
+            // Recompute on resize
+            window.addEventListener('resize', () => updateTrack());
+
+            // Also recompute after fonts/images finish loading
+            window.addEventListener('load', () => updateTrack());
+        })();
+    </script>
+
+</body>
+
+</html>
