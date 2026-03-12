@@ -1839,12 +1839,23 @@
                 });
             }
 
+            function resetSlideAnim(slide) {
+                // Force animated GIF / WebP img to restart from frame 0
+                slide.querySelectorAll('img').forEach(img => {
+                    const src = img.src;
+                    img.src = '';
+                    img.src = src;
+                });
+            }
+
             function vizGoTo(index) {
                 current = Math.max(0, Math.min(total - 1, index));
                 updateTrack();
                 updateSlides();
                 updateDots();
                 updateIcons();
+                // Restart animation on the newly-focused slide
+                resetSlideAnim(slides[current]);
             }
 
             // ── Autoplay ────────────────────────────────────────────────
