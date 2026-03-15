@@ -15,7 +15,7 @@ I am a 2nd-year PhD student at [Shanghai Jiao Tong University](https://www.sjtu.
 I am passionate about Multimodal Perception, Video Representation, 3D/4D Vision and Embodied Control. If you'd like to collaborate or have any questions, feel free to reach out to me via email.
 
 ## 🚀News
-- [2026.03] Meet [OmniStream](https://go2heart.github.io/omnistream/), our latest exploration on a Unified Vision Foundation Model!
+- [2026.03] Meet [OmniStream](https://go2heart.github.io/omnistream/), our latest exploration of a **Unified Vision Foundation Model**!
 - [2025.07] StreamFormer has been nominated as an **Oral Presentation** in ICCV 2025!
 - [2025.06] StreamFormer has been accepted to **ICCV 2025**! See you in Hawaii!
 - [2025.04] StreamFormer is now available on [Arxiv](https://arxiv.org/abs/2504.20041)!
