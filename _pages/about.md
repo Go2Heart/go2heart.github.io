@@ -26,7 +26,7 @@ I am passionate about Multimodal Perception, Video Representation, 3D/4D Vision 
 ## 📄Publications
 <div style="display: flex; align-items: center; border-radius: 8px; padding: 20px; margin: 20px 0;">
   <div style="flex: 1; margin-right: 20px;">
-    <img src="omnistream/static/images/teaser.png" alt="OmniStream" style="width: 100%; max-width: 300px; border-radius: 4px;">
+    <img src="omnistream/static/images/teaser_w.png" alt="OmniStream" style="width: 100%; max-width: 300px; border-radius: 4px;">
   </div>
   <div style="flex: 2;">
     <h4 style="margin-top: 0; margin-bottom: 4px;">OmniStream: Mastering Perception, Reconstruction and Action in Continuous Streams</h4>
