@@ -15,6 +15,7 @@ I am a 2nd-year PhD student at [Shanghai Jiao Tong University](https://www.sjtu.
 I am passionate about Multimodal Perception, Video Representation, 3D/4D Vision and Embodied Control. If you'd like to collaborate or have any questions, feel free to reach out to me via email.
 
 ## 🚀News
+- [2026.03] Meet [OmniStream](https://go2heart.github.io/omnistream/), our latest exploration on a Unified Vision Foundation Model!
 - [2025.07] StreamFormer has been nominated as an **Oral Presentation** in ICCV 2025!
 - [2025.06] StreamFormer has been accepted to **ICCV 2025**! See you in Hawaii!
 - [2025.04] StreamFormer is now available on [Arxiv](https://arxiv.org/abs/2504.20041)!
@@ -23,6 +24,21 @@ I am passionate about Multimodal Perception, Video Representation, 3D/4D Vision 
 
 
 ## 📄Publications
+<div style="display: flex; align-items: center; border-radius: 8px; padding: 20px; margin: 20px 0;">
+  <div style="flex: 1; margin-right: 20px;">
+    <img src="omnistream/static/images/teaser.png" alt="OmniStream" style="width: 100%; max-width: 300px; border-radius: 4px;">
+  </div>
+  <div style="flex: 2;">
+    <h4 style="margin-top: 0; margin-bottom: 4px;">OmniStream: Mastering Perception, Reconstruction and Action in Continuous Streams</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;"><strong>Yibin Yan*</strong>, Jilan Xu*, Shangzhe Di, Haoning Wu, Weidi Xie</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;"><em>Technical Report</em>, 2026</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;">
+      <a href="/streamformer/" style="margin-right: 5px;">[Project Page]</a>
+      <a href="https://github.com/Go2Heart/OmniStream" style="margin-right: 5px;">[Code]</a>
+      <a href="https://arxiv.org/abs/2603.12265">[Paper]</a>
+    </h4>
+  </div>
+</div>
 
 <div style="display: flex; align-items: center; border-radius: 8px; padding: 20px; margin: 20px 0;">
   <div style="flex: 1; margin-right: 20px;">
