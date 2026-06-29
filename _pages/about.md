@@ -31,7 +31,7 @@ I am passionate about Multimodal Perception, Video Representation, 3D/4D Vision 
   <div style="flex: 2;">
     <h4 style="margin-top: 0; margin-bottom: 4px;">OmniStream: Mastering Perception, Reconstruction and Action in Continuous Streams</h4>
     <h4 style="margin: 4px 0; font-weight: normal;"><strong>Yibin Yan*</strong>, Jilan Xu*, Shangzhe Di, Haoning Wu, Weidi Xie</h4>
-    <h4 style="margin: 4px 0; font-weight: normal;"><em>Technical Report</em>, 2026</h4>
+    <h4 style="margin: 4px 0; font-weight: normal;"><em>ECCV</em>, 2026</h4>
     <h4 style="margin: 4px 0; font-weight: normal;">
       <a href="/omnistream/" style="margin-right: 5px;">[Project Page]</a>
       <a href="https://github.com/Go2Heart/OmniStream" style="margin-right: 5px;">[Code]</a>
